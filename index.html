@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zizigo year end party !</title>
+
+    <!-- Open Graph / 링크 공유 시 썸네일 -->
+    <meta property="og:title" content="zizigo year end party !">
+    <meta property="og:description" content="🍷 와인 테이스팅 파티에 초대합니다! 10종이 넘는 와인을 준비했습니다.">
+    <meta property="og:image" content="https://yaygee.github.io/year-end-party-invitation/front.PNG">
+    <meta property="og:url" content="https://yaygee.github.io/year-end-party-invitation/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="zizigo year end party !">
+    <meta name="twitter:description" content="🍷 와인 테이스팅 파티에 초대합니다!">
+    <meta name="twitter:image" content="https://yaygee.github.io/year-end-party-invitation/front.PNG">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            perspective: 1500px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 400px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: #f5e6d3;
+        }
+
+        .card-back {
+            background: #f5e6d3;
+            transform: rotateY(180deg);
+        }
+
+        .card-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .map-button {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 10;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .map-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .instruction {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            color: #333;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 90vw;
+                height: calc(90vw * 1.5);
+            }
+
+            .instruction {
+                font-size: 12px;
+                padding: 12px 24px;
+            }
+
+            .map-button {
+                font-size: 11px;
+                padding: 7px 14px;
+                bottom: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" onclick="flipCard()">
+        <div class="card" id="invitationCard">
+            <div class="card-face card-front">
+                <img src="front.PNG" alt="초대장 앞면">
+            </div>
+            <div class="card-face card-back">
+                <img src="back.png" alt="초대장 뒷면">
+                <a href="https://naver.me/5fdexO1s" target="_blank" class="map-button" onclick="event.stopPropagation()">📍 찾아오는 지름길</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="instruction">
+        🖱️ 클릭하면 뒤집어집니다
+    </div>
+
+    <script>
+        function flipCard() {
+            const card = document.getElementById('invitationCard');
+            card.classList.toggle('flipped');
+        }
+
+        // 키보드로도 조작 가능하도록
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'Enter') {
+                flipCard();
+            }
+        });
+    </script>
+</body>
+</html>
